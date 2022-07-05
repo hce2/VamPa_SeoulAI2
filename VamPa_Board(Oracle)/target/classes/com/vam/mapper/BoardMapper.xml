@@ -9,15 +9,20 @@
  지금 이 xml은 com.vam.mapper패키지에 BoardMapper인터페이스에 매칭(매핑)이 된다. -->
  
  		
- 		<!-- 게시판 등록 -->
-	    <insert id="enroll">
-	    	<!-- enroll함수는 BoardMapper인터페이스에 매핑이 되어 BoardMapper인터페이스 안에있는 enroll함수가 호출된다. -->
-	        <!-- 인자로 전달받은 dto의 getter함수를 자동으로 호출해서 매핑 -->
-	        <!-- #{title}, #{content}, #{writer} => 이곳에 실제 값이 들어감
-	        # : 마이바티스 문법인데 케터에 들어온 값을 넣어준다. -->
-	        insert into vam_board(title, content, writer) values (#{title}, #{content}, #{writer})
-	        
+ 	<!-- 게시판 등록 -->
+	<insert id="enroll">
+		<!-- enroll함수는 BoardMapper인터페이스에 매핑이 되어 BoardMapper인터페이스 안에있는 enroll함수가 호출된다. -->
+	    <!-- 인자로 전달받은 dto의 getter함수를 자동으로 호출해서 매핑 -->
+	    <!-- #{title}, #{content}, #{writer} => 이곳에 실제 값이 들어감
+	    	# : 마이바티스 문법인데 케터에 들어온 값을 넣어준다. -->
+	    insert into vam_board(title, content, writer) values (#{title}, #{content}, #{writer})
 	    </insert>
+	    
+	        
+    <!-- 게시판 목록 -->
+    <select id="getList" resultType="com.vam.model.BoardVO">
+    select * from vam_board
+    </select>
  
   </mapper>
   

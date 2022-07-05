@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +29,10 @@ public class BoardController {
 	
 	// get로 온 요청중에 list로 온것은 boardListGET()이 함수를 실행해라
 	@GetMapping("/list") //void로 하면 어노테이션에서 요청한 값과 같은 값이 알아서 리턴된다.
-	public void boardListGET() {    
+	public void boardListGET(Model model) {    
         log.info("게시판 목록 페이지 진입");  
         // 리턴값이 return "board/list"; 와 같다
+        model.addAttribute("list", bservice.getList());
     }
 	
 	// get로 온 요청중에 enroll로 온것은 boardEnrollGET()이 함수를 실행해라
