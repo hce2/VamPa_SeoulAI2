@@ -75,16 +75,22 @@
 			<!-- 아이템으로 들어온 값을 list에 하나의 값으로 넣는다-->	            
 				<tr>
 	                <td><c:out value="${list.bno}"/></td>
-	                <td><c:out value="${list.title}"/></td>
+	                <td>
+		                <a class="move" href='<c:out value="${list.bno}"/>'>
+	                        <c:out value="${list.title}"/>
+	                    </a>
+	                </td> 
 	                <td><c:out value="${list.writer}"/></td>
+	                
 	           <%-- <td><c:out value="${list.regdate}"/></td>
 	                <td><c:out value="${list.updateDate}"/></td> --%>
-	            
 	            	<td><fmt:formatDate pattern="yyyy/MM/dd" value="${list.regdate}"/></td>
                 	<td><fmt:formatDate pattern="yyyy/MM/dd" value="${list.updateDate}"/></td>
 	            </tr>
 	        </c:forEach>
 		</table>
+		<form id="moveForm" method="get">    
+    	</form>
 	</div>
 	
 	<script>
@@ -107,6 +113,26 @@
         }    
 
     });
+    /* a 태그가 동작 되도록 하는 자바스크립트 코드 */
+    let moveForm = $("#moveForm");
+    /* a 태그(class move인 제목)가 클릭이 되면 이 함수를 실행한다. */
+    $(".move").on("click", function(e){
+        e.preventDefault(); //이벤트 버블링 막기. 자식의 이벤트를 부모에서도 인식해서 실행. 이벤트를 부모에서 실행하지 않도록
+       
+	    // jquery name 받아와서 내용을 제거해주기
+	   	let nameEle = $("input[name=bno]"); //name속성값이 bno인 객체 가져오기
+	   	nameEle.remove(); //그놈 dom요소 제거
+	   	//vanilla js는 부모.removeChile(자식)으로 지우고
+	   	// jquery는 자기.remove()로 지운다.
+	   	
+	   	
+        //비어있는 moveForm에 동적으로 hidden input으로 bno를 추가.
+        //이것만 있으면 뒤로가기를 했을때 bno가 누적되는 현상이 발생한다.
+        moveForm.append("<input type='hidden' name='bno' value='"+ $(this).attr("href")+ "'>");
+        moveForm.attr("action", "/board/get");
+        moveForm.submit();
+    });
+    
  
 	</script>
 </body>

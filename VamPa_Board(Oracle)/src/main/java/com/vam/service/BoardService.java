@@ -10,4 +10,7 @@ public interface BoardService {
     
     /* 게시판 목록 */
     public List<BoardVO> getList();
+    
+    /* 게시글 상세조회 */
+    public BoardVO getPage(int bno);
 }

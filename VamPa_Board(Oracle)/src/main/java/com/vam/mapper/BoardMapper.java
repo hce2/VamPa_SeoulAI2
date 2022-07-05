@@ -12,5 +12,7 @@ public interface BoardMapper {
     /* 게시판 목록 */
     public List<BoardVO> getList();
     //리턴타입이 BoardVO인 리스트를 가져온다.
-
+    
+    /* 게시글 상세조회 */
+    public BoardVO getPage(int bno);
 }

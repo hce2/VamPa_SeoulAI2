@@ -44,6 +44,8 @@ public class BoardServiceTests {
         service.getList().forEach(board -> log.info("" + board));        
         
     }
+    
+    
  
 }
  
