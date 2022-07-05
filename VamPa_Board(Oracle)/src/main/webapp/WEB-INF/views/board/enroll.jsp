@@ -8,5 +8,22 @@
 </head>
 <body>
 	<h1>게시판 등록</h1>
+	<!-- /board/enroll로 post(데이터가 숨겨져서 날아간다)요청을 보내라 -->
+	<!-- get으로 요천한 화면에서 유저가 정보를 입력하면 post로 같은 url로 넘어간다 -->
+	<form action="/board/enroll" method="post">
+	    <div class="input_wrap">
+	        <label>Title</label>
+	        <input name="title">
+	    </div>
+	    <div class="input_wrap">
+	        <label>Content</label>
+	        <textarea rows="3" name="content"></textarea>
+	    </div>
+	    <div class="input_wrap">
+	        <label>Writer</label>
+	        <input name="writer">
+	    </div>
+	    <button class="btn">등록</button>
+	</form>
 </body>
 </html>
