@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vam.model.BoardVO;
+import com.vam.model.Criteria;
+import com.vam.model.PageMakerDTO;
 import com.vam.service.BoardService;
 
 /*@Controller 어노테이션의 경우 해당 클래스를 
@@ -29,11 +31,14 @@ public class BoardController {
 	
 	// get로 온 요청중에 list로 온것은 boardListGET()이 함수를 실행해라
 	@GetMapping("/list") //void로 하면 어노테이션에서 요청한 값과 같은 값이 알아서 리턴된다.
-	public void boardListGET(Model model) {    
+	public void boardListGET(Model model, Criteria cri) {    
         log.info("게시판 목록 페이지 진입");  
         // 리턴값이 return "board/list"; 와 같다
-        model.addAttribute("list", bservice.getList());
-    }
+        model.addAttribute("list", bservice.getListPaging(cri));
+        int total = bservice.getTotal();
+        PageMakerDTO pageMake = new PageMakerDTO(cri, total); 
+        model.addAttribute("pageMaker", pageMake);
+	}
 	
 	// get로 온 요청중에 enroll로 온것은 boardEnrollGET()이 함수를 실행해라
 	// Enroll : 등록하다

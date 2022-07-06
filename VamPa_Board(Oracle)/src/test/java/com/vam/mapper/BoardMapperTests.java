@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.vam.model.BoardVO;
+import com.vam.model.Criteria;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -80,6 +81,26 @@ public class BoardMapperTests {
          int result = mapper.delete(5);
          log.info("result : " + result);
          
+     }
+     
+     /* 게시판 목록(페이징 적용)테스트 */
+     @Test
+     public void testGetListPaging() {
+         //Given, when, then
+    	 //이떄의 cri에 1과 10의 값이 들어감
+         Criteria cri = new Criteria(); //준비
+                          
+         List list = mapper.getListPaging(cri); //전달
+         
+         list.forEach(board -> log.info("" + board)); //test
+     }
+     
+     /* 게시판 전체 글의 수 가져오기 테스트 */
+     @Test
+     public void testGetTotal() {
+         //Given, when, then
+         int total = mapper.getTotal();
+         log.info("등록된 총 글의 수 : " + total);
      }
  
 }

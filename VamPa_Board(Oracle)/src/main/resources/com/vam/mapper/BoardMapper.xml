@@ -38,6 +38,26 @@
     <delete id="delete">
         delete from vam_board where bno = #{bno}
     </delete>
+    
+    <!-- Oracle -->
+    <!-- 게시물 목록(페이징) -->
+    <!-- 게시물 목록(페이징) -->
+    <select id="getListPaging" resultType="com.vam.model.BoardVO">  
+    <!-- '<' 크다라고 인식 할 수도 있고,  --> 
+    <![CDATA[     
+        select bno, title, content, writer, regdate, updatedate from(
+                select /*+INDEX_DESC(vam_board pk_board) */ rownum  as rn, bno, title, content, writer, regdate, updatedate         
+                from vam_board where rownum <= #{pageNum} * #{amount})        
+        where rn > (#{pageNum} -1) * #{amount}
+    ]]>  
+    </select>
+    
+    <!-- 게시물 총 개숫 -->
+    <select id="getTotal" resultType="int">
+    
+        select count(*) from vam_board
+    
+    </select>
  
   </mapper>
   
