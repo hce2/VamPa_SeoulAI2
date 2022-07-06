@@ -49,7 +49,7 @@ public class BoardController {
         log.info("BoardVO : " + board);
         bservice.enroll(board); //글쓰기
         //addFlashAttribute : 일회성으로만 데이터 전송. 한번만 창을 띄운다.
-        rttr.addFlashAttribute("result", "enrol success"); //등록 성공 창 띄우기
+        rttr.addFlashAttribute("result", "enroll success"); //등록 성공 창 띄우기
         return "redirect:/board/list"; //글을 쓰고나면 list페이지로 이동
     }
 	
@@ -64,6 +64,37 @@ public class BoardController {
         
     }
     
+    /* 수정 페이지 이동 */
+    @GetMapping("/modify")
+    public void boardModifyGET(int bno, Model model) {
+        
+        model.addAttribute("pageInfo", bservice.getPage(bno));
+        
+    }
+    
+    /* 글 수정 기능*/
+    @PostMapping("/modify")
+    public String boardModifyPOST(BoardVO board, RedirectAttributes rttr) {
+        
+        bservice.modify(board);
+        
+        rttr.addFlashAttribute("result", "modify success");
+        
+        return "redirect:/board/list";
+        
+    }
+    
+    /* 글 삭제 기능 */
+    @PostMapping("/delete")
+    public String boardDeletePOST(int bno, RedirectAttributes rttr) {
+        
+        bservice.delete(bno);
+        
+        rttr.addFlashAttribute("result", "delete success");
+        
+        return "redirect:/board/list";
+        
+    }
     
 //	@GetMapping("/custom")
 //	public String boardCustomGET() {       

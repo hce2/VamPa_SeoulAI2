@@ -26,10 +26,18 @@
  
  	<!-- 게시글 상세조회 -->
     <select id="getPage" resultType="com.vam.model.BoardVO">
-    
         select * from vam_board where bno = #{bno}
-    
     </select>
+ 
+ 	<!-- 게시글 수정 -->
+    <update id="modify">   
+        update vam_board set title = #{title}, content = #{content}, updatedate = sysdate where bno = #{bno}
+    </update>
+    
+    <!-- 게시판 삭제 -->
+    <delete id="delete">
+        delete from vam_board where bno = #{bno}
+    </delete>
  
   </mapper>
   
