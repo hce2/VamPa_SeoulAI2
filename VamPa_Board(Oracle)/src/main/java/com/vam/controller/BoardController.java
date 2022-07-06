@@ -31,8 +31,10 @@ public class BoardController {
 	
 	// get로 온 요청중에 list로 온것은 boardListGET()이 함수를 실행해라
 	@GetMapping("/list") //void로 하면 어노테이션에서 요청한 값과 같은 값이 알아서 리턴된다.
-	public void boardListGET(Model model, Criteria cri) {    
-        log.info("게시판 목록 페이지 진입");  
+	public void boardListGET(Model model, Criteria cri) {  
+		//화면에서 넘어온 name과 controller에서 쓰는 변수의 이름이 카멜케이스로 변환한 것이 같으면 자동매핑됨
+		//Criteria에는 pageNum이 있고, get.jsp에는 bno가 있다.
+		log.info("게시판 목록 페이지 진입");  
         // 리턴값이 return "board/list"; 와 같다
         model.addAttribute("list", bservice.getListPaging(cri));
         int total = bservice.getTotal();
@@ -63,18 +65,18 @@ public class BoardController {
      * URL에 파라미터가 눡되어 전달되는데 이런 기법을 URL Rewrite처리라고 한다. */
     /* 게시글 상세조회 */
     @GetMapping("/get")
-    public void boardGetPageGET(int bno, Model model) {
+    public void boardGetPageGET(int bno, Model model, Criteria cri) {
         
         model.addAttribute("pageInfo", bservice.getPage(bno));
-        
+        model.addAttribute("cri", cri);
     }
     
     /* 수정 페이지 이동 */
     @GetMapping("/modify")
-    public void boardModifyGET(int bno, Model model) {
+    public void boardModifyGET(int bno, Model model, Criteria cri) {
         
         model.addAttribute("pageInfo", bservice.getPage(bno));
-        
+        model.addAttribute("cri", cri);
     }
     
     /* 글 수정 기능*/
