@@ -37,7 +37,7 @@ public class BoardController {
 		log.info("게시판 목록 페이지 진입");  
         // 리턴값이 return "board/list"; 와 같다
         model.addAttribute("list", bservice.getListPaging(cri));
-        int total = bservice.getTotal();
+        int total = bservice.getTotal(cri);
         PageMakerDTO pageMake = new PageMakerDTO(cri, total); 
         model.addAttribute("pageMaker", pageMake);
 	}

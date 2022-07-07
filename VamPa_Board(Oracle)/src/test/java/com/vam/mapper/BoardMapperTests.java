@@ -99,8 +99,9 @@ public class BoardMapperTests {
      @Test
      public void testGetTotal() {
          //Given, when, then
-         int total = mapper.getTotal();
+	    	 Criteria cri = new Criteria();
+	     	 cri.setKeyword("mapper");
+         int total = mapper.getTotal(cri);
          log.info("등록된 총 글의 수 : " + total);
      }
- 
 }

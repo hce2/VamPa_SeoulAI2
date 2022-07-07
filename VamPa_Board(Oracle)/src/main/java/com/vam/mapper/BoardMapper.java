@@ -32,5 +32,5 @@ public interface BoardMapper {
     //위의 함수정의에 대한 약속 => 이 파일은 인터페이스 파일이기 떄문에
     
     /* 게시글 총 갯수 */
-    public int getTotal();
+    public int getTotal(Criteria cri);
 }
